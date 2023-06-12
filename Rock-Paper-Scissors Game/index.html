@@ -10,7 +10,32 @@
 
   <body>
     <main class="container">
-      
+      <section class="score-card">
+        <p class="top">Top Score: <span id="top-score">0 : 0</span></p>
+        <p class="score">
+          You <span id="your-score">1</span> : <span id="pc-score">0</span> PC
+        </p>
+        <p class="description">Please Make Your Selection</p>
+        <article class="selection">
+          <img src="./assets/rock.png" alt="rock">
+          <img src="./assets/paper.png" alt="paper">
+          <img src="./assets/scissor.png" alt="scissor">
+        </article>
+      </section>
+      <section class="choice-section">
+        <article class="choices">
+          <div id="your-choice"></div>
+          <div id="pc-choice"></div>
+        </article>
+        <p class="message"></p>
+      </section>
+      <section class="modal-card">
+        <article class="modal">
+          <p>Game Over</p>
+          <p id="final-message">You Won</p>
+          <button id="play-again">Play Again</button>
+        </article>
+      </section>
     </main>
     <!-- <main class="container">
       <section class="score-card">
