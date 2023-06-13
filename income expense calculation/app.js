@@ -62,10 +62,18 @@ expenseForm.addEventListener("submit", (e) => {
   date.valueAsDate = new Date();
 });
 
-expenseBody.addEventListener('click',(e)=>{
-  console.log(e.target);
-})
+expenseBody.addEventListener("click", (e) => {
+  if (e.target.classList.contains("fa-solid")) {
+    e.target.parentElement.parentElement.remove();
+    const id = e.target.id;
+    console.log(id);
 
+    expensesList = expensesList.filter((expense) => expense.id != id);
+    console.log(expensesList);
+
+    localStorage.setItem("expenses", JSON.stringify(expensesList))
+  }
+});
 
 /* FUNCTIONS */
 const calculateUpdate = () => {
