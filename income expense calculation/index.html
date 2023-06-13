@@ -25,26 +25,28 @@
     </header>
 
     <main class="container" style="max-width: 800px">
-      <form action="" class="d-flex gap-2">
+      <form id="income-form" action="#" class="d-flex gap-2">
         <input
+        id="income-input"
           type="number"
           class="form-control"
           placeholder="Enter your income."
           autofocus
           min="0"
+          required
         />
-        <button type="submit" class="btn btn-warning">Add</button>
+        <button id="add-btn" type="submit" class="btn btn-warning">Add</button>
       </form>
 
-      <form id="spend-form" class="row g-3 p-3 mt-5 border rounded-4 m-0">
+      <form id="expense-form" class="row g-3 p-3 mt-5 border rounded-4 m-0">
         <h4 class="text-center h3">Expenses's form</h4>
         <div class="col-6">
-          <label for="spend-area" class="form-label">Expense Area</label>
+          <label for="expense-area" class="form-label">Expense Area</label>
           <input
             required
             type="text"
             class="form-control"
-            id="spend-area"
+            id="expense-area"
             placeholder="Bills, Shopping.."
           />
         </div>
@@ -208,7 +210,7 @@
       </section>
     </main> -->
 
-    <script src="app.js"></script>
+    <script src="./app.js"></script>
     <!-- <script src="app_objesiz.js"></script> -->
   </body>
 </html>

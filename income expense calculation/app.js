@@ -1,144 +1,84 @@
-//? Selectors
-const ekleBtn = document.getElementById("ekle-btn")
-const gelirInput = document.getElementById("gelir-input")
-const ekleFormu = document.getElementById("ekle-formu")
+/* SELECTORS */
 
-//? Sonuc tablosu
-const gelirinizTd = document.getElementById("geliriniz")
-const giderinizTd = document.getElementById("gideriniz")
-const kalanTd = document.getElementById("kalan")
+const addBtn = document.getElementById("add-btn");
+const incomeInput = document.getElementById("income-input");
+const incomeForm = document.getElementById("income-form");
+const incomeSum = document.getElementById("income-sum");
 
-//? harcama formu
-const harcamaFormu = document.getElementById("harcama-formu")
-const harcamaAlaniInput = document.getElementById("harcama-alani")
-const tarihInput = document.getElementById("tarih")
-const miktarInput = document.getElementById("miktar")
+/*Spend Form  */
+const expenseForm = document.getElementById("expense-form");
+const expenseArea = document.getElementById("expense-area");
+const date = document.getElementById("date");
+const amount = document.getElementById("amount");
 
-//? Haracama Tablosu
-const harcamaBody = document.getElementById("harcama-body")
-const temizleBtn = document.getElementById("temizle-btn")
+/* Expense table */
+const expenseBody = document.getElementById("expenses-body");
 
-//? Variables
-let gelirler = 0
+/* VARIABNLE */
+let incomes = 0;
+let expensesList = [];
 
-//? tum harcamalari saklayacak dizi (JSON)
-let harcamaListesi = []
+/* EVENTS */
+incomeForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  incomes += Number(incomeInput.value);
 
-//?Events
+  localStorage.setItem("incomes", incomes);
 
-//! Formun submit butonuna basildiginda
-ekleFormu.addEventListener("submit", (e) => {
-  e.preventDefault() //? reload'u engeller
-  gelirler = gelirler + Number(gelirInput.value) //? string eklemiyi engelledik
+  incomeForm.reset();
+  calculateUpdate();
+});
 
-  //? gelirlerin kalıcı olmasi icin localStorage a kopyaliyoruz
-  localStorage.setItem("gelirler", gelirler)
-
-  //? input degerini sifrladik
-  ekleFormu.reset()
-
-  //? Degisiklikleri sonuc tablosuna yazan fonks.
-  hesaplaVeGuncelle()
-})
-
-//! Sayfa her yuklendikten sonra calisan event
 window.addEventListener("load", () => {
-  //? gelirler bilgisini local storage'dan okuyarak global degiskenimize yaz
-  gelirler = Number(localStorage.getItem("gelirler"))
+  incomes = Number(localStorage.getItem("incomes"));
 
-  //? localStroge'den harcama listesini okuyarak global dizimize saklıyoruz.
-  harcamaListesi = JSON.parse(localStorage.getItem("harcamalar")) || []
+  expensesList = JSON.parse(localStorage.getItem("expenses")) || [];
 
-  //? harcama dizisinin icindeki objleri tek tek DOMa yaziyoruz.
-  harcamaListesi.forEach((harcama) => harcamayiDomaYaz(harcama))
+  expensesList.forEach((expense) => {
+    writeExpensesToDom(expense);
+  });
 
-  console.log(harcamaListesi)
-  //? Tarih inputunu bugun deger ile yukle
-  tarihInput.valueAsDate = new Date()
+  date.valueAsDate = new Date();
+  calculateUpdate();
+});
 
-  //? Degisen bilgileri hesapla ve DOM'a bas
-  hesaplaVeGuncelle()
+expenseForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const newExpense = {
+    id: new Date().getTime(),
+    date: date.value,
+    expense: expenseArea.value,
+    amount: amount.value,
+  };
+
+  expensesList.push(newExpense);
+
+  localStorage.setItem("expenses", JSON.stringify(expensesList));
+
+  writeExpensesToDom(newExpense);
+
+  expenseForm.reset();
+  date.valueAsDate = new Date();
+});
+
+expenseBody.addEventListener('click',(e)=>{
+  console.log(e.target);
 })
 
-//! harcama formu submit edildiginde calisir
-harcamaFormu.addEventListener("submit", (e) => {
-  e.preventDefault() //? reload'u engelle
 
-  //? yeni harcama bilgileri ile bir obje olusutur
-  const yeniHarcama = {
-    id: new Date().getTime(), //? Sistem saatini (ms olarak) verir. Unique gibidir.
-    tarih: tarihInput.value,
-    alan: harcamaAlaniInput.value,
-    miktar: miktarInput.value,
-  }
+/* FUNCTIONS */
+const calculateUpdate = () => {
+  incomeSum.textContent = incomes;
+};
 
-  //? yeni harcama objesini diziye ekle
-  harcamaListesi.push(yeniHarcama)
-
-  //? dizisin son halini localStorage e gonder.
-  localStorage.setItem("harcamalar", JSON.stringify(harcamaListesi))
-
-  harcamayiDomaYaz(yeniHarcama)
-
-  hesaplaVeGuncelle()
-
-  //? Formdaki verileri sil
-  harcamaFormu.reset()
-  tarihInput.valueAsDate = new Date()
-})
-
-const hesaplaVeGuncelle = () => {
-  const giderler = harcamaListesi.reduce(
-    (toplam, harcama) => toplam + Number(harcama.miktar),
-    0
-  )
-
-  gelirinizTd.innerText = gelirler
-  giderinizTd.innerText = giderler
-  kalanTd.innerText = gelirler - giderler
-}
-
-const harcamayiDomaYaz = ({ id, miktar, tarih, alan }) => {
-  // const { id, miktar, tarih, alan } = yeniHarcama
-  harcamaBody.innerHTML += `
+const writeExpensesToDom = ({ id, date, expense, amount }) => {
+  expenseBody.innerHTML += `
   <tr>
-    <td>${tarih}</td>
-    <td>${alan}</td>
-    <td>${miktar}</td>
-    <td><i id=${id} class="fa-solid fa-trash-can text-danger"  type="button"></i></td>
+    <td>${date}</td>
+    <td>${expense}</td>
+    <td>${amount}</td>
+    <td><i id=${id} class="fa-solid fa-trash-can text-danger" type="button"></i></td>
   </tr>
-  `
-}
-//! Harcama tablosunda herhangi bir alana tiklanildiginda calisir.
-harcamaBody.addEventListener("click", (e) => {
-  // console.log(e.target)
-
-  //? Tiklama sil butonlarindan geldi ise
-  if (e.target.classList.contains("fa-trash-can")) {
-    //? DOM'dan ilgili row'u sildik.
-    e.target.parentElement.parentElement.remove()
-
-    const id = e.target.id
-    console.log(id)
-
-    //? Dizideki ilgili objeyi sildik.
-    harcamaListesi = harcamaListesi.filter((harcama) => harcama.id != id)
-
-    //? Silinmis yeni diziyi Local Storage aktardik.
-    localStorage.setItem("harcamalar", JSON.stringify(harcamaListesi))
-
-    //? her satir silindikten sonra yeni degerleri hesapla ve DOM'a yaz
-    hesaplaVeGuncelle()
-  }
-})
-
-//? temizle butonına basildigi zaman calis
-temizleBtn.addEventListener("click", () => {
-  if (confirm("Silmek istedigine emin misiniz?")) {
-    harcamaListesi = [] //? RAM'deki harcama listesini sil
-    gelirler = 0 //? RAM'deki gelirleri sil
-    localStorage.clear() //? local straoge'daki tüm verileri sil
-    harcamaBody.innerHTML = "" //? DOM'daki tüm harcamlar sil
-    hesaplaVeGuncelle() //? sonuc tablosundaki (DOM) gelirler, giderler ve kalan degerleri sil.
-  }
-})
+  `;
+};
