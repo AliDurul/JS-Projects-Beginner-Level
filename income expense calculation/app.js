@@ -4,18 +4,22 @@ const addBtn = document.getElementById("add-btn");
 const incomeInput = document.getElementById("income-input");
 const incomeForm = document.getElementById("income-form");
 const incomeSum = document.getElementById("income-sum");
+const expenseSum = document.getElementById("expenses-sum");
+const remainingSum = document.getElementById("remaining");
 
 /*Spend Form  */
 const expenseForm = document.getElementById("expense-form");
 const expenseArea = document.getElementById("expense-area");
 const date = document.getElementById("date");
 const amount = document.getElementById("amount");
+const cleanBtn = document.getElementById("clean-btn");
 
 /* Expense table */
 const expenseBody = document.getElementById("expenses-body");
 
 /* VARIABNLE */
 let incomes = 0;
+
 let expensesList = [];
 
 /* EVENTS */
@@ -57,6 +61,7 @@ expenseForm.addEventListener("submit", (e) => {
   localStorage.setItem("expenses", JSON.stringify(expensesList));
 
   writeExpensesToDom(newExpense);
+  calculateUpdate();
 
   expenseForm.reset();
   date.valueAsDate = new Date();
@@ -66,18 +71,33 @@ expenseBody.addEventListener("click", (e) => {
   if (e.target.classList.contains("fa-solid")) {
     e.target.parentElement.parentElement.remove();
     const id = e.target.id;
-    console.log(id);
 
     expensesList = expensesList.filter((expense) => expense.id != id);
-    console.log(expensesList);
 
-    localStorage.setItem("expenses", JSON.stringify(expensesList))
+    localStorage.setItem("expenses", JSON.stringify(expensesList));
+    calculateUpdate();
   }
+});
+
+cleanBtn.addEventListener("click", () => {
+  expensesList = [];
+  incomes = 0;
+  localStorage.clear();
+  expenseBody.textContent = ''
+  calculateUpdate();
 });
 
 /* FUNCTIONS */
 const calculateUpdate = () => {
+  const expenses = expensesList.reduce(
+    (sum, expense) => sum + Number(expense.amount),
+    0
+  );
+
+  expenseSum.textContent = expenses;
   incomeSum.textContent = incomes;
+
+  remainingSum.textContent = incomes - expenses;
 };
 
 const writeExpensesToDom = ({ id, date, expense, amount }) => {
