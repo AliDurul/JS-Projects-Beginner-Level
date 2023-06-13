@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Background Color Change</title>
+    <style>
+      body {
+        transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+        background: blueviolet;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 90vh;
+
+        & button {
+          padding: 1rem;
+          font-size: 1.5rem;
+          background: transparent;
+          border: 2px solid #fff;
+          transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          &:hover {
+            background: #fff;
+            color: #000;
+            cursor: pointer;
+          }
+          &:active {
+            padding: 0.5rem;
+          }
+        }
+        & h2 {
+          color: #fff;
+          font-weight: 200;
+          font-size: 2rem;
+          padding-left: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn">Click me</button>
+    <h2 id="hexCode">#8a2be2</h2>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
