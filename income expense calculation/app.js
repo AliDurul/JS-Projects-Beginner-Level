@@ -80,11 +80,14 @@ expenseBody.addEventListener("click", (e) => {
 });
 
 cleanBtn.addEventListener("click", () => {
+if(confirm('Are You Sure that You want to delete all!!')){
   expensesList = [];
   incomes = 0;
   localStorage.clear();
   expenseBody.textContent = ''
   calculateUpdate();
+}
+
 });
 
 /* FUNCTIONS */
