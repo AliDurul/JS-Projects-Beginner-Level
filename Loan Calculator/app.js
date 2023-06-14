@@ -12,7 +12,12 @@ let toplamTutar ;
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  if (confirm("emin miziniz")) {
+  if (Swal.fire(
+    'The Internet?',
+    'That thing is still around?',
+    'question'
+  )) 
+    {
     if (select.value === "Konut Kredisi") {
       faizOran = 1.29;
     } else if (select.value === "Ihtiyac Kredisi") {
