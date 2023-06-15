@@ -33,6 +33,7 @@ productList.addEventListener("click", (e) => {
   if (e.target.className == "fa-solid fa-minus") {
     if (e.target.nextElementSibling.innerText > 1) {
       e.target.nextElementSibling.innerText--;
+      calculateProductPrice(e.target);
     } else {
       if (
         confirm(
@@ -43,14 +44,14 @@ productList.addEventListener("click", (e) => {
         )
       ) {
         e.target.closest(".main__product").remove();
+        calculateCartPrice();
       }
     }
-    calculateProductPrice();
   }
   //plus
   else if (e.target.classList.contains("fa-plus")) {
     e.target.previousElementSibling.innerText++;
-    calculateProductPrice();
+    calculateProductPrice(e.target);
   }
   //delete
   else if (e.target.id == "remove-product") {
@@ -74,5 +75,26 @@ const saveLocalStorage = () => {
   localStorage.setItem("FreeshippingPrice", FreeshippingPrice);
 };
 
-const calculateProductPrice = () => {};
-const calculateCardPrice = () => {};
+const calculateProductPrice = (btn) => {
+  const infoDiv = btn.closest(".main__product-info");
+  const price = infoDiv.querySelector(".main__product-price strong").innerText;
+  const quantity = infoDiv.querySelector("#quantity").innerText;
+
+  console.log(quantity);
+  infoDiv.querySelector(".main__product-line-price").innerText = (
+    price * quantity
+  ).toFixed(2);
+};
+const calculateCardPrice = () => {
+  const productPriceDivs = productList.querySelectorAll(
+    ".main__product-line-price"
+  );
+  let subtotal = 0;
+  productPriceDivs.forEach((p) => {
+    subtotal += parseFloat(p.innerText);
+  });
+  console.log(subtotal);
+
+  const taxPrice = subtotal * localStorage.getItem("taxRate");
+
+};
