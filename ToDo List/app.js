@@ -6,8 +6,27 @@ const ul = document.querySelector("#todos");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault(e);
-  console.log(toDoInput.value);
   createElements();
+});
+
+ul.addEventListener("click", (e) => {
+  if (e.target.classList.contains("fa-trash-can")) {
+    e.target.closest("li").remove();
+  } else if (e.target.classList.contains("form-check-input")) {
+    if (e.target.checked) {
+      e.target.nextSibling.classList.add("text-decoration-line-through");
+    } else {
+      e.target.nextSibling.classList.remove("text-decoration-line-through");
+    }
+  } else if (e.target.id === "removeAll") {
+    while (ul.firstChild) {
+      if (ul.children.length === 1) {
+        break;
+      } else {
+        ul.lastChild.remove();
+      }
+    }
+  }
 });
 
 const createElements = () => {
@@ -30,10 +49,7 @@ const createElements = () => {
   checkbox.setAttribute("id", "check");
   label.setAttribute("class", "form-check-label ");
   label.setAttribute("for", "check");
-  i.setAttribute('class','fa-solid fa-trash-can')
-
-
-
+  i.setAttribute("class", "fa-solid fa-trash-can");
 
   toDoInput.value = "";
 };

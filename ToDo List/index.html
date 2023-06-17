@@ -24,6 +24,7 @@
   <body>
     <div class="container">
       <h1>TODO APP</h1>
+
       <form id="addForm" class="d-flex justfy-content">
         <div class="mb-3">
           <input
@@ -38,12 +39,15 @@
           <i class="fa-solid fa-plus"></i>
         </button>
       </form>
-      <ul id="todos" class="list-group" style="max-width: 600px"></ul>
-      <div class="removeAll mt-4">
-        <button id="removeAll" type="button" class="btn btn-danger">
-          Clear All
-        </button>
-      </div>
+
+      <ul id="todos" class="list-group" style="max-width: 600px">
+          <div class="removeAll mt-4 text-center">
+            <button id="removeAll" type="button" class="btn btn-danger">
+              Clear All
+            </button>
+          </div>
+
+      </ul>
     </div>
     <script src="app.js"></script>
   </body>
