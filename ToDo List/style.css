@@ -1,0 +1,79 @@
+body {
+    background-color: rgb(241, 239, 236);
+  }
+  .container {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 800px;
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.852);
+    background-color: rgba(11, 11, 11, 0.419);
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  }
+  #addForm {
+    width: 620px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #inputText {
+    width: 545px !important;
+    height: 55px !important;
+    margin-top: 1rem;
+    border-radius: 5px 0 0 5px;
+    font-size: 1.2rem;
+  }
+  #addBtn {
+    width: 60px !important;
+    height: 55px !important;
+    border-radius: 0 5px 5px 0;
+  }
+  #addBtn i {
+    font-size: 1rem;
+  }
+  #todos {
+    width: 650px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .list-group-item {
+    height: 60px !important;
+    width: 600px;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    border-radius: 5px 5px;
+    margin: 1px !important;
+  }
+  input {
+    width: 15%;
+  }
+  label {
+    margin-left: 0.5rem;
+  }
+  i {
+    margin-left: auto;
+  }
+  #todos li {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  }
+  #todos i:hover {
+    color: red;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  h1 {
+    color: RED;
+    font-family: "Times New Roman", Times, serif;
+    text-shadow: 2px 2px 2px black;
+    margin-top: 2rem;
+  }
+  .form-check-input {
+    cursor: pointer;
+  }
+  #removeAll {
+    margin-bottom: 1rem;
+  }
