@@ -11,6 +11,8 @@ let sNum = 0;
 let choosedOp = "";
 let result = 0;
 
+jkgj
+
 /* addEventListener */
 buttons.addEventListener("click", (e) => {
   addToBottom(e);
