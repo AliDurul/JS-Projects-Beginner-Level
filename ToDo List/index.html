@@ -23,31 +23,31 @@
   </head>
   <body>
     <div class="container">
-      <h1>TODO APP</h1>
-
-      <form id="addForm" class="d-flex justfy-content">
-        <div class="mb-3">
-          <input
-            type="text"
-            class="form-control w-75"
-            id="inputText"
-            placeholder="Please enter your todo..."
-            required
-          />
-        </div>
-        <button id="addBtn" type="submit" class="btn btn-primary w-15">
-          <i class="fa-solid fa-plus"></i>
-        </button>
-      </form>
-
-      <ul id="todos" class="list-group" style="max-width: 600px">
-          <div class="removeAll mt-4 text-center">
-            <button id="removeAll" type="button" class="btn btn-danger">
-              Clear All
-            </button>
+      <h1 class="text-center">TODO APP</h1>
+      <section class="container form__section">
+        <form id="addForm" class="d-flex justfy-content">
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control w-75"
+              id="inputText"
+              placeholder="Please enter your todo..."
+              required
+            />
           </div>
-
-      </ul>
+          <button id="addBtn" type="submit" class="btn btn-primary w-15">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </form>
+      </section>
+      <section class="container todo__lists">
+        <ul id="todos" class="list-group" style="max-width: 600px"></ul>
+      </section>
+      <div class="removeAll mt-4 text-center">
+        <button id="removeAll" type="button" class="btn btn-danger">
+          Clear All
+        </button>
+      </div>
     </div>
     <script src="app.js"></script>
   </body>
