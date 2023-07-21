@@ -2,7 +2,7 @@
 
 - https://alidurul.github.io/JS-Projects-Beginner-Level/Ios%20Calculater/
 
--   Project Name       |Libraries and Technologies I use     
+ Project Name       |Libraries and Technologies I use     
 :-------------------------|-------------------------
 [Ios Calculater](https://alidurul.github.io/JS-Projects-Beginner-Level/Ios%20Calculater/)| HTML-CSS-JS
 [Digital Clock](https://alidurul.github.io/JS-Projects-Beginner-Level/Digital%20Clock/)| HTML-CSS-JS
