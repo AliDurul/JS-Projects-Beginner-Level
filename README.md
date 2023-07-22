@@ -1,7 +1,5 @@
 # JS-Projects
 
-- https://alidurul.github.io/JS-Projects-Beginner-Level/Ios%20Calculater/
-
  Project Name       |Libraries and Technologies I use     
 :-------------------------|-------------------------
 [Ios Calculater](https://alidurul.github.io/JS-Projects-Beginner-Level/Ios%20Calculater/)| HTML-CSS-JS
