@@ -22,7 +22,7 @@
       <li> Css
       <li> Html
     </td>
-    <td>  <h4>Once you clone the project</h4>  
+    <td> 
       
  1) [Ios Calculater](https://alidurul.github.io/JS-Projects-Beginner-Level/Ios%20Calculater/)
  2) [Digital Clock](https://alidurul.github.io/JS-Projects-Beginner-Level/Digital%20Clock/)
